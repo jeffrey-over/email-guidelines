@@ -50,7 +50,19 @@ The HTML code of an email should use as much semantic markup as possible. The us
 <h1 style="margin:0; color:#0f0; font:24px Arial, sans-serif;">Lorem ipsum</h1>
 ```
 
-Container tags such as `<header>`, `<main>`, `<footer>`, `<article>` or `<section>` are to use with caution as several major email clients (like Gmail or Outlook.com) don't support them. These are preferred to be replaced by `role` attributes instead.
+Container tags such as `<header>`, `<main>`, `<footer>`, `<article>` or `<section>` are to be used with caution as several major email clients (like Gmail or Outlook.com) don't support them. It is preferred to use the corresponding [implicit ARIA `role`](https://www.w3.org/TR/html-aria/#implicit) of the given element instead.
+
+```html
+<!-- Bad example -->
+<header>
+  <h1>Lorem ipsum</h1>
+</header>
+
+<!-- Good example -->
+<div role="banner">
+  <h1>Lorem ipsum</h1>
+</div>
+```
 
 ## Tables for layout
 
@@ -65,7 +77,7 @@ But even on *the Outlooks*, the use of presentational tables should be limited t
 
 * Setting a fixed width on an element (using `<table style="width:600px">`).
 * Setting two elements side by side (using two siblings `<td>`).
-* Setting a `background-color` or a `border` style.
+* Setting a `padding`, `background-color` or a `border` style.
 
 And because the `role="presentation"` might still be removed by email clients (for example in Yahoo! Mail or AOL), it is even better to include presentational tables only in conditional comments for Outlook.
 
@@ -149,6 +161,16 @@ This is especially helpful in case an email client has strong default styles. Fo
 		<td>Lorem ipsum.</td>
 	</tr>
 </table>
+```
+
+4. Setting `height`. The `height` property in CSS is turned into `min-height` in every Yahoo! Mail and AOL clients. (See also: [Yahoo converts the height property to min-height](https://github.com/hteumeuleu/email-bugs/issues/9).) Using the HTML `height` attribute instead is a safer bet.
+
+```html
+<!-- Bad example -->
+<td style="height:100px;">Lorem ipsum.</td>
+
+<!-- Good example -->
+<td height="100">Lorem ipsum.</td>
 ```
 
 

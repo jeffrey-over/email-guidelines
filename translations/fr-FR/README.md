@@ -67,7 +67,7 @@ Mais même sur *les Outlook*, l'utilisation de tableaux de mise en page doit êt
 
 * Définir une largeur fixe sur un élément (en utilisant `<table style="width:600px">`).
 * Positionner deux éléments côte à côte (en utilisant deux `<td>` adjacents).
-* Définir des styles `background-color` ou `border`.
+* Définir des styles `padding`, `background-color` ou `border`.
 
 Et parce que l'attribut `role="presentation"` peut être supprimé par les clients de messagerie (par exemple dans Yahoo! Mail ou AOL), il est de meilleur usage d'inclure les tableaux de mise en page dans des commentaires conditionnels pour Outlook.
 
@@ -152,6 +152,15 @@ C'est particulièrement utilise dans le cas où un client de messagerie a des st
 </table>
 ```
 
+4. Définir une hauteur avec `height`. La propriété `height` en CSS est transformée en `min-height` dans tous les clients de Yahoo! Mail et AOL. (Voir aussi : [Yahoo transforme la propriété height en min-height](https://github.com/hteumeuleu/email-bugs/issues/9).) Utiliser l'attribut HTML `height` à la place s'avère une solution plus fiable.
+
+```html
+<!-- Bad example -->
+<td style="height:100px;">Lorem ipsum.</td>
+
+<!-- Good example -->
+<td height="100">Lorem ipsum.</td>
+```
 
 ## Utiliser `margin` ou `padding` pour des espacements
 
